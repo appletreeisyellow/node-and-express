@@ -11,14 +11,15 @@ let app = express();
  * A middleware needs to be mounted using the method app.use(path, middlewareFunction).
  *
 */
-app.use("/public", express.static(__dirname + `/public`))
+app.use("/public", express.static(`${__dirname}/public`))
 
 app.get("/", (req, res) => {
   res.sendFile(`${__dirname}/views/index.html`)
 })
 
-
-
+app.get("/json", (req, res) => {
+  res.json({"message": "Hello json"})
+})
 
 
 
