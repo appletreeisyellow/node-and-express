@@ -15,9 +15,18 @@ app.use("/public", express.static(`${__dirname}/public`))
  * Middleware are functions that intercept route handlers
  * A middleware needs to be mounted using the method app.use(path, middlewareFunction).
  */
+// Logger Middleware
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path} - ${req.ip}`)
   next()
+})
+
+// Chain Middleware to Create a Time Server
+app.get("/now", (req, res, next) => {
+  req.time = new Date().toString()
+  next()
+}, (req, res) => {
+  res.json({time: req.time})
 })
 
 
